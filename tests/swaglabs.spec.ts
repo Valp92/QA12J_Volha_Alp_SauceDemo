@@ -7,7 +7,9 @@ describe('Sharelane test', async () => {
 let driver: WebDriver;
 
 beforeEach(async() => {
-    console.log("pre-condition");
+    driver = await new Builder().forBrowser(Browser.CHROME).build();
+    await driver.manage().window().maximize();
+    await driver.get("https://www.saucedemo.com");
     });
     
     afterEach(async() => {
@@ -15,10 +17,7 @@ beforeEach(async() => {
     });
 
 it('Login', async () => {
-driver = await new Builder().forBrowser(Browser.CHROME).build();
-await driver.manage().window().maximize();
 try {
-await driver.get("https://www.saucedemo.com")
 await driver.findElement(By.css('input[name=user-name]')).sendKeys('visual_user');  //input class
 await driver.findElement(By.css('input[id=password]')).sendKeys('secret_sauce'), 5000;  //input class
 await driver.findElement(By.xpath('//input[@class="submit-button btn_action"]')).click(), 5000; //input type
